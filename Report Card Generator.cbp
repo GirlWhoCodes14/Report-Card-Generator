@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Report Card Generator" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Report Card Generator" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Report Card Generator" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option additional_output="C:/Users/alexi/OneDrive/Documents/NDHU/Year 1/Semester 2/Computer Programming 2/Final Project/Report Card Generator/;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Linker>
+			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-static" />
+		</Linker>
+		<Unit filename="include/Course.h" />
+		<Unit filename="include/Courses.h" />
+		<Unit filename="include/Grading.h" />
+		<Unit filename="include/IllegalInputException.h" />
+		<Unit filename="include/Student.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="ndhuGradeTable.txt" />
+		<Unit filename="src/Course.cpp" />
+		<Unit filename="src/Courses.cpp" />
+		<Unit filename="src/Grading.cpp" />
+		<Unit filename="src/IllegalInputException.cpp" />
+		<Unit filename="src/Student.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

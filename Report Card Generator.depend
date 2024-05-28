@@ -1,0 +1,121 @@
+# depslib dependency file v1.0
+1695092608 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\course.cpp
+	"Course.h"
+
+1676744896 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\course.h
+	"IllegalInputException.h"
+
+1695027525 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\main.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	<fstream>
+	<exception>
+	<limits>
+	"IllegalInputException.h"
+	"Student.h"
+	"Courses.h"
+	"Grading.h"
+
+1623765599 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\reportcard.cpp
+	"ReportCard.h"
+
+1623765788 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\reportcard.h
+	"Student.h"
+	"Courses.h"
+
+1623557452 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\studentinfo.h
+	<iostream>
+	<string>
+
+1623557452 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\studentinfo.cpp
+	"StudentInfo.h"
+
+1676746546 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\student.h
+	"IllegalInputException.h"
+	"Courses.h"
+
+1676746855 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\courses.h
+	<vector>
+	<algorithm>
+	"Course.h"
+
+1676990405 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\courses.cpp
+	"Courses.h"
+
+1676746546 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\student.cpp
+	"Student.h"
+
+1676705097 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\grading.cpp
+	"Grading.h"
+
+1676704526 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\grading.h
+	<iostream>
+	<string>
+	<fstream>
+	<iomanip>
+
+1676747582 c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\include\illegalinputexception.h
+	<iostream>
+	<string>
+	<iomanip>
+	<fstream>
+	<exception>
+	<limits>
+
+1676742469 source:c:\users\alexi\onedrive\documents\ndhu\year 1\semester 2\computer programming 2\final project\report card generator\src\illegalinputexception.cpp
+	"IllegalInputException.h"
+
+1695027525 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\main.cpp
+	<iostream>
+	<string>
+	<iomanip>
+	<fstream>
+	<exception>
+	<limits>
+	"IllegalInputException.h"
+	"Student.h"
+	"Courses.h"
+	"Grading.h"
+
+1676747582 c:\users\alexi\onedrive\documents\ndhu\report card generator\include\illegalinputexception.h
+	<iostream>
+	<string>
+	<iomanip>
+	<fstream>
+	<exception>
+	<limits>
+
+1676746546 c:\users\alexi\onedrive\documents\ndhu\report card generator\include\student.h
+	"IllegalInputException.h"
+	"Courses.h"
+
+1676746855 c:\users\alexi\onedrive\documents\ndhu\report card generator\include\courses.h
+	<vector>
+	<algorithm>
+	"Course.h"
+
+1676744896 c:\users\alexi\onedrive\documents\ndhu\report card generator\include\course.h
+	"IllegalInputException.h"
+
+1676704526 c:\users\alexi\onedrive\documents\ndhu\report card generator\include\grading.h
+	<iostream>
+	<string>
+	<fstream>
+	<iomanip>
+
+1695092608 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\src\course.cpp
+	"Course.h"
+
+1676990405 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\src\courses.cpp
+	"Courses.h"
+
+1676705097 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\src\grading.cpp
+	"Grading.h"
+
+1676742469 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\src\illegalinputexception.cpp
+	"IllegalInputException.h"
+
+1676746546 source:c:\users\alexi\onedrive\documents\ndhu\report card generator\src\student.cpp
+	"Student.h"
+
