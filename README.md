@@ -2,6 +2,8 @@
 
 ## Overview
 A program written in C++ to generate a report card. It was programmed by Alexis Ayuso.
+
+### Goal
 Allows the user to enter student information and course information to calculate their GPA using the NDHU Grade Point Table.
 
 ### Menu
