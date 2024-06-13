@@ -27,7 +27,7 @@ void Student::get_student(){
     system("pause");
 }
 std::string Student::get_student_name(){
-    std::cout << std::setw(32) << std::left << "Full Name (i.e. John Doe):";
+    std::cout << std::setw(32) << std::left << "Full Name (e.g. John Doe):";
     std::string fullName{};
     std::cin.clear();
     std::cin.ignore();
@@ -38,7 +38,7 @@ int Student::get_student_id(){
     int studentID;
     while (true) {
         try{
-            std::cout << std::setw(32) << std::left << "Student ID (i.e 410921350):";
+            std::cout << std::setw(32) << std::left << "Student ID (e.g. 410921350):";
             std::cin >> studentID;
             if (!std::cin) {throw IllegalInputException{};}
             break;

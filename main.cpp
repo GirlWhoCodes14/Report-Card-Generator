@@ -1,6 +1,5 @@
 /*
 Alexis Ayuso
-410921355
 Report Card Generator
 */
 

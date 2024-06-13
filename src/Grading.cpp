@@ -10,6 +10,7 @@ void Grading::display() const {
     std::string letter{""};
     float gpi{0.0}, lowerPercent{0.0}, upperPercent{0.0};
 
+    std::cout << std::setw(30) << std::right << "Grade Table" << std::endl << std::endl;
     std::cout << std::setw(15) << std::left << "Letter"
                 << std::setw(15) << "GPI"
                 << std::setw(15) << "Lower %"

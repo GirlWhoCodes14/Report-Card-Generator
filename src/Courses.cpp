@@ -29,21 +29,24 @@ bool Courses::addCourse(std::string code, std::string title, float credits, floa
     for (const Course &course: courses)
         if (course.getCode() == code) {return false;}
 
-    Course temp {code, title, credits, grade};
-    courses.push_back(temp);
-    setTotalCreditsnPoints();
+    Course temp {code, title, credits, grade}; // create new course
+    courses.push_back(temp); // push into courses vector
+    setTotalCreditsnPoints(); // recalculate GPA
 
-    std::sort(courses.begin(), courses.end());
+    std::sort(courses.begin(), courses.end()); // court courses
     return true;
 }
 
 bool Courses::editCourse(std::string code) {
-    bool flag{false};
+    bool isPresent{false};
     int option{};
 
     for (const Course &course: courses)
-        if (course.getCode() == code) {flag == true; break;}
-    if (flag) return false;
+        if (course.getCode() == code) {
+            isPresent == true;
+            break;
+        }
+    if (!isPresent) return false;
 
     std::cout << "\n\nPlease select which field you want to edit:\n"
                 << "1.\tCode\n"
@@ -86,7 +89,7 @@ void Courses::added (std::string code, std::string title, float credits, float g
     system("pause");
 }
 void Courses::editted (std::string code) {
-    std::string response {((editCourse(code)) ? " was successfully editted" : " does not exist")};
+    std::string response {((editCourse(code)) ? " was successfully edited" : " does not exist")};
     std::cout << "\n\n\n***" << code << response << "!***\n\n\n";
     system("pause");
 }
