@@ -51,14 +51,14 @@ float Course::getPoints() const {return points;}
 
 //functions to input course details
 std::string Course::get_code(){
-    std::cout << std::setw(40) << std::left << "Course Code (i.e. CSIEB0010):";
+    std::cout << std::setw(40) << std::left << "Course Code (e.g. CSIEB0010):";
     std::string cCode{""};
     std::cin.ignore();
     getline(std::cin, cCode);
     return cCode;
 }
 std::string Course::get_title() {
-    std::cout << std::setw(40) << std::left << "Course Name (i.e. Programming I):";
+    std::cout << std::setw(40) << std::left << "Course Name (e.g. Programming I):";
     std::string cTitle{""};
     getline(std::cin, cTitle);
     return cTitle;

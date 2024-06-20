@@ -16,10 +16,7 @@ void Courses::setTotalCreditsnPoints() {
     }
     setGPA();
 }
-void Courses::setGPA() {
-    gpa = 0.0;
-    gpa = totalPoints/totalCredits;
-}
+void Courses::setGPA() {gpa = totalPoints/totalCredits;}
 
 //getters
 float Courses::getTotalCredits() {return totalCredits;}
@@ -32,26 +29,24 @@ bool Courses::addCourse(std::string code, std::string title, float credits, floa
     for (const Course &course: courses)
         if (course.getCode() == code) {return false;}
 
-    Course temp {code, title, credits, grade};
-    courses.push_back(temp);
-    setTotalCreditsnPoints();
+    Course temp {code, title, credits, grade}; // create new course
+    courses.push_back(temp); // push into courses vector
+    setTotalCreditsnPoints(); // recalculate GPA
 
-    std::sort(courses.begin(), courses.end());
+    std::sort(courses.begin(), courses.end()); // court courses
     return true;
 }
 
 bool Courses::editCourse(std::string code) {
-    bool isFound{false};
+    bool isPresent{false};
     int option{};
 
-    for (const Course &course: courses) {
+    for (const Course &course: courses)
         if (course.getCode() == code) {
-            isFound = true;
+            isPresent == true;
             break;
         }
-    }
-
-    if (!isFound) return false;
+    if (!isPresent) return false;
 
     std::cout << "\n\nPlease select which field you want to edit:\n"
                 << "1.\tCode\n"
@@ -61,35 +56,17 @@ bool Courses::editCourse(std::string code) {
                 << "Enter the corresponding number of your choice:\t";
     std::cin >> option;
 
-    std::cout << "\n\n";
-
     for (Course &course: courses){
         if (course.getCode() == code) {
             switch(option){
                 case 1:
-                    {
-                        course.setCode(course.get_code());
-                        break;
-                    }
+                    course.setCode(course.get_code()); break;
                 case 2:
-                    {
-                        clearInput();
-                        course.setTitle(course.get_title());
-                        break;
-                    }
+                    course.setTitle(course.get_title()); break;
                 case 3:
-                    {
-                        course.setCredits(course.get_credits());
-                        course.setPoints();
-                        setTotalCreditsnPoints();
-                        break;
-                    }
+                    course.setCredits(course.get_credits()); break;
                 case 4:
-                    {
-                        course.setGrade(course.get_grade());
-                        setTotalCreditsnPoints();
-                        break;
-                    }
+                    course.setGrade(course.get_grade()); break;
             }
         }
     }
@@ -108,16 +85,16 @@ bool Courses::deleteCourse(std::string code) {
 }
 
 void Courses::added (std::string code, std::string title, float credits, float grade) {
-    std::cout << "\n\n***" << code << ((addCourse(code, title, credits, grade)) ? " was successfully added" : " already exists") << "!***\n\n\n";
+    std::cout << "\n\n\n***" << code << ((addCourse(code, title, credits, grade)) ? " was successfully added" : " already exists") << "!***\n\n\n";
     system("pause");
 }
-void Courses::edited (std::string code) {
+void Courses::editted (std::string code) {
     std::string response {((editCourse(code)) ? " was successfully edited" : " does not exist")};
-    std::cout << "\n\n***" << code << response << "!***\n\n\n";
+    std::cout << "\n\n\n***" << code << response << "!***\n\n\n";
     system("pause");
 }
 void Courses::deleted (std::string code) {
-    std::cout << "\n\n***" << code << ((deleteCourse(code)) ? " was successfully deleted" : " does not exist") << "!***\n\n\n";
+    std::cout << "\n\n\n***" << code << ((deleteCourse(code)) ? " was successfully deleted" : " does not exist") << "!***\n\n\n";
     system("pause");
 }
 
@@ -142,7 +119,7 @@ void Courses::edit_course() {
         system("pause");
     } else {
         std::cout << "Please enter the following course details...\n\n";
-        edited(get_code());
+        editted(get_code());
     }
 }
 
