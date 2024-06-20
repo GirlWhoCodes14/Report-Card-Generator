@@ -43,7 +43,7 @@ bool Courses::editCourse(std::string code) {
 
     for (const Course &course: courses)
         if (course.getCode() == code) {
-            isPresent == true;
+            isPresent = true;
             break;
         }
     if (!isPresent) return false;
@@ -60,13 +60,29 @@ bool Courses::editCourse(std::string code) {
         if (course.getCode() == code) {
             switch(option){
                 case 1:
-                    course.setCode(course.get_code()); break;
+                    {
+                        course.setCode(course.get_code());
+                        break;
+                    }
                 case 2:
-                    course.setTitle(course.get_title()); break;
+                    {
+                        clearInput();
+                        course.setTitle(course.get_title());
+                        break;
+                    }
                 case 3:
-                    course.setCredits(course.get_credits()); break;
+                    {
+                        course.setCredits(course.get_credits());
+                        course.setPoints();
+                        setTotalCreditsnPoints();
+                        break;
+                    }
                 case 4:
-                    course.setGrade(course.get_grade()); break;
+                    {
+                        course.setGrade(course.get_grade());
+                        setTotalCreditsnPoints();
+                        break;
+                    }
             }
         }
     }
@@ -88,7 +104,7 @@ void Courses::added (std::string code, std::string title, float credits, float g
     std::cout << "\n\n\n***" << code << ((addCourse(code, title, credits, grade)) ? " was successfully added" : " already exists") << "!***\n\n\n";
     system("pause");
 }
-void Courses::editted (std::string code) {
+void Courses::edited (std::string code) {
     std::string response {((editCourse(code)) ? " was successfully edited" : " does not exist")};
     std::cout << "\n\n\n***" << code << response << "!***\n\n\n";
     system("pause");
@@ -119,7 +135,7 @@ void Courses::edit_course() {
         system("pause");
     } else {
         std::cout << "Please enter the following course details...\n\n";
-        editted(get_code());
+        edited(get_code());
     }
 }
 
