@@ -28,7 +28,7 @@ class Courses : public Course
         bool deleteCourse(std::string code);
 
         void added(std::string code, std::string title, float credits, float grade);
-        void editted(std::string code);
+        void edited(std::string code);
         void deleted(std::string code);
 
         void add_course();
