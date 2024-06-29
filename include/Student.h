@@ -1,6 +1,8 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <iomanip>
+
 #include "IllegalInputException.h"
 #include "Courses.h"
 
@@ -29,7 +31,6 @@ class Student : public IllegalInputException
         void exportStudent(std::ofstream &print) const;
 
         void displayReportCard(Courses* myCourses) const;
-        void exportReportCard(std::ofstream &print, Courses* myCourses) const;
         void export_report_card(Courses* myCourses);;
 
         //deconstructor
@@ -38,6 +39,8 @@ class Student : public IllegalInputException
     private:
         std::string name;
         int id;
+
+        IllegalInputException message;
 };
 
 #endif // STUDENT_H

@@ -42,3 +42,6 @@ out/
 # CodeBlocks
 *.depend
 *.layout
+
+# ignore generated report cards
+*Report Card.txt

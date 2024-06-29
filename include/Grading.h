@@ -3,17 +3,27 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <iomanip>
+#include <fstream>
+#include <windows.h>
+
+#include "IllegalInputException.h"
 
 class Grading
 {
     public:
+        // constructor
         Grading();
-        void display() const;
+
+        bool openFile();
+        void display();
+
+        // deconstructor
         virtual ~Grading();
 
     private:
+        std::ifstream inGradeTable;
+        IllegalInputException illegal;
 };
 
 #endif // GRADING_H

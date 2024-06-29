@@ -17,13 +17,15 @@ void Course::setCode(std::string code) {this->code = code;}
 void Course::setTitle(std::string title) {this->title = title;}
 void Course::setCredits(float credits) {this->credits = credits;}
 void Course::setGrade(float grade) {this->grade = grade; setGPInLetter();}
+
 void Course::setGPInLetter() {
-    std::ifstream inGradeTable{"ndhuGradeTable.txt"}; //open file
+    std::ifstream inGradeTable{"grade_table.txt"}; //open file
     std::string letter{""};
     float gpi{0.0}, lowerPercent{0.0}, upperPercent{0.0};
 
     if (!inGradeTable){ //check if file is open
-        std::cerr << "\n\nndhuGradeTable.txt was NOT found!\n";
+        //std::cerr << "\n\ngrade_table.txt was NOT found!\n";
+        message.coloredMessage(FOREGROUND_RED, "\n<grade_table.txt was NOT found!>\n<Please put grade_table.txt file in the same folder as the application>\n\n");
         //return 1; //exit the program (main)
     }
 
@@ -37,6 +39,7 @@ void Course::setGPInLetter() {
 
     setPoints();
 }
+
 void Course::setPoints() {points = credits*gpi;}
 
 //getters
@@ -44,52 +47,73 @@ std::string Course::getCode() const {return code;}
 std::string Course::getTitle() const {return title;}
 float Course::getCredits() const {return credits;}
 float Course::getGrade() const {return grade;}
-
 float Course::getGPI() const {return gpi;}
 std::string Course::getLetter() const {return letter;}
 float Course::getPoints() const {return points;}
 
 //functions to input course details
 std::string Course::get_code(){
-    std::cout << std::setw(40) << std::left << "Course Code (e.g. CSIEB0010):";
     std::string cCode{""};
+    std::cin.clear();
     std::cin.ignore();
-    getline(std::cin, cCode);
+
+    while (true) {
+        try{
+            std::cout << std::setw(6) << std::right << "~ " << "Course Code:\t";
+            getline(std::cin, cCode);
+            if (cCode.empty()) {throw IllegalInputException{};}
+            break;
+        } catch (const IllegalInputException &ex) {
+            errorCatch("Course code CANNOT be blank!");
+        }
+    }
+    // using transform with toupper to convert mystr to uppercase
+    transform(cCode.begin(), cCode.end(), cCode.begin(), ::toupper);
     return cCode;
 }
 std::string Course::get_title() {
-    std::cout << std::setw(40) << std::left << "Course Name (e.g. Programming I):";
     std::string cTitle{""};
-    getline(std::cin, cTitle);
+    while (true) {
+        try{
+            std::cout << std::setw(6) << std::right << "~ " << "Course Name:\t";
+            getline(std::cin, cTitle);
+            if (cTitle.empty()) {throw IllegalInputException{};}
+            break;
+        } catch (const IllegalInputException &ex) {
+            errorCatch("Course name CANNOT be blank!");
+        }
+    }
     return cTitle;
 }
 float Course::get_credits() {
     float cr{0.0};
     while (true) {
         try{
-            std::cout << std::setw(40) << std::left << "Course Credits (i.e. 0-4):";
+            std::cout << std::setw(6) << std::right << "~ " << "Course Credits:\t";
             std::cin >> cr;
-            if (!std::cin || cr > 4 || cr < 0) {throw IllegalInputException{};}
+            if ( !std::cin || cr > 4 || cr < 0 || int(cr*10)%5 ) {throw IllegalInputException{};}
             break;
         } catch (const IllegalInputException &ex) {
+            errorCatch("Course credits MUST be 0-4 credit hours (multiple of 0.5)!");
             clearInput();
-            std::cerr << ex.what() << "***NOTE: Course Credits must be between 0 to 4 credit hours***\n" << std::endl;
         }
-    } return cr;
+    }
+    return cr;
 }
 float Course::get_grade() {
     float g{0.0};
     while (true) {
         try{
-            std::cout << std::setw(40) << std::left << "Final Grade (i.e. 0-100):";
+            std::cout << std::setw(6) << std::right << "~ " << "Final Grade:\t";
             std::cin >> g;
             if (!std::cin || g > 100 || g < 0) {throw IllegalInputException{};}
             break;
         } catch (const IllegalInputException &ex) {
+            errorCatch("Grade MUST be 0-100!");
             clearInput();
-            std::cerr << ex.what() << "***NOTE: Grade must be between 0% to 100%***\n" << std::endl;
         }
-    } return g;
+    }
+    return g;
 }
 
 //operator overloading
@@ -99,13 +123,13 @@ bool Course::operator < (const Course &obj) const {
 
 //other methods
 void Course::display() const {
-     std::cout << std::setw(18) << std::left << code << std::setw(50) << std::left << title
-            << std::setw(12) << std::left << credits << std::setw(10) << std::left << letter << "\n";
+     std::cout << std::setw(18) << std::left << code << std::setw(50) << title
+            << std::setw(12) << std::fixed << std::setprecision(1) << credits << letter << "\n";
 }
 
 void Course::exportCourse(std::ofstream &print) const {
-     print << std::setw(18) << std::left << code << std::setw(50) << std::left << title
-            << std::setw(12) << std::left << credits << std::setw(10) << std::left << letter << "\n";
+     print << std::setw(18) << std::left << code << std::setw(50) << title
+            << std::setw(12) << std::fixed << std::setprecision(1) << credits << letter << "\n";
 }
 
 //deconstructor
