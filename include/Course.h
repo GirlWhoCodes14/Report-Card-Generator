@@ -1,6 +1,12 @@
 #ifndef COURSE_H
 #define COURSE_H
 
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <fstream>
+#include <windows.h>
+
 #include "IllegalInputException.h"
 
 class Course : public IllegalInputException
@@ -53,6 +59,8 @@ class Course : public IllegalInputException
         float gpi;
         std::string letter;
         float points;
+
+        IllegalInputException message;
 };
 
 #endif // COURSE_H

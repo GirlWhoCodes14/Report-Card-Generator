@@ -42,20 +42,28 @@ bool Courses::editCourse(std::string code) {
     int option{};
 
     for (const Course &course: courses)
-        if (course.getCode() == code) {
-            isPresent = true;
-            break;
-        }
+        if (course.getCode() == code) {isPresent = true; break;}
     if (!isPresent) return false;
 
-    std::cout << "\n\nPlease select which field you want to edit:\n"
-                << "1.\tCode\n"
-                << "2.\tTitle\n"
-                << "3.\tCredits\n"
-                << "4.\tGrade\n\n"
-                << "Enter the corresponding number of your choice:\t";
-    std::cin >> option;
+    std::cout << "\nSelect which field you want to edit:\n" << std::right
+                << std::setw(6) << "1. " << "Code\n"
+                << std::setw(6) << "2. " << "Title\n"
+                << std::setw(6) << "3. " << "Credits\n"
+                << std::setw(6) << "4. " << "Grade\n";
 
+    while (true) {
+        try{
+            std::cout << "~ Enter the number of your choice:\t";
+            std::cin >> option;
+            if (!std::cin || option > 4 || option < 1) {throw IllegalInputException{};}
+            break; //exit the loop if no exception was thrown
+        } catch (const IllegalInputException &ex) {
+            errorCatch("Selection must be between 0-4.");
+            clearInput();
+        }
+    }
+
+    std::cout << "\nEnter the following course detail...\n";
     for (Course &course: courses){
         if (course.getCode() == code) {
             switch(option){
@@ -101,91 +109,106 @@ bool Courses::deleteCourse(std::string code) {
 }
 
 void Courses::added (std::string code, std::string title, float credits, float grade) {
-    std::cout << "\n\n\n***" << code << ((addCourse(code, title, credits, grade)) ? " was successfully added" : " already exists") << "!***\n\n\n";
-    system("pause");
+    bool isAdded {addCourse(code, title, credits, grade)};
+    std::string message = "\n[ " + code + (std::string)(isAdded ? " was successfully edited" : " does not exist") + "! ]\n";
+    illegal.coloredMessage( (isAdded ? FOREGROUND_GREEN : FOREGROUND_RED), message );
 }
 void Courses::edited (std::string code) {
-    std::string response {((editCourse(code)) ? " was successfully edited" : " does not exist")};
-    std::cout << "\n\n\n***" << code << response << "!***\n\n\n";
-    system("pause");
+    bool isEdited {editCourse(code)};
+    std::string message = "\n[ " + code + (std::string)(isEdited ? " was successfully edited" : " does not exist") + "! ]\n";
+    illegal.coloredMessage( (isEdited ? FOREGROUND_GREEN : FOREGROUND_RED), message );
 }
+
 void Courses::deleted (std::string code) {
-    std::cout << "\n\n\n***" << code << ((deleteCourse(code)) ? " was successfully deleted" : " does not exist") << "!***\n\n\n";
-    system("pause");
+    bool isDeleted {deleteCourse(code)};
+    std::string message = "\n[ " + code + (std::string)(isDeleted ? " was successfully deleted" : " does not exist") + "! ]\n";
+    illegal.coloredMessage( (isDeleted ? FOREGROUND_GREEN : FOREGROUND_RED), message );
 }
 
 // Prompt for inputs
 
 void Courses::add_course() {
-    std::cout << "\n\n\n\n~~~~~ADD COURSE~~~~~\n\n\n"
-        << "Please enter the following course details...\n\n";
+    std::cout << "\n***** ADD COURSE *****\n\n"
+        << "Enter the following course details...\n";
 
-    std::string code = get_code(),
-            title = get_title();
-    float credits = get_credits(),
-            grade = get_grade();
+    std::string code{};
+    while (true) {
+        try{
+            code = get_code();
+            for (const Course &course: courses)
+                if (course.getCode() == code) {throw IllegalInputException{};}
+            break;
+        } catch (const IllegalInputException &ex) {
+            errorCatch(code + " already exists. Press enter and");
+        }
+    }
+
+    std::string title = get_title();
+    float credits = get_credits();
+    float grade = get_grade();
 
     added(code, title, credits, grade);
 }
 
 void Courses::edit_course() {
-    std::cout << "\n\n\n\n~~~~~EDIT COURSE~~~~~\n\n\n";
+    std::cout << "\n***** EDIT COURSE *****\n\n";
     if (getAmountofCourses() == 0) {
-        std::cout << "***Sorry, no courses available to edit.***\n\n\n";
-        system("pause");
+        illegal.coloredMessage(FOREGROUND_RED, "<No courses available to edit.>\n\n");
     } else {
-        std::cout << "Please enter the following course details...\n\n";
+        std::cout << "Enter the following course detail...\n";
         edited(get_code());
     }
 }
 
 void Courses::delete_course() {
-    std::cout << "\n\n\n\n~~~~~DELETE COURSE~~~~~\n\n\n";
+    std::cout << "\n***** DELETE COURSE *****\n\n";
     if (getAmountofCourses() == 0) {
-        std::cout << "***Sorry, no courses available to delete.***\n\n\n";
-        system("pause");
+        illegal.coloredMessage(FOREGROUND_RED, "<No courses available to delete.>\n\n");
     } else {
-        std::cout << "Please enter the following course details...\n\n";
+        std::cout << "Enter the following course detail...\n";
         deleted(get_code());
     }
 }
 
 void Courses::display() const {
-    std::cout << "_________________________________________________________________________________________\n"
+    std::cout << "--------------------------------------------------------------------------------------\n"
             << std::setw(18) << std::left << "Code"
             << std::setw(50) << "Title"
             << std::setw(12) << "Credits"
-            << std::setw(10) << "Letter" << std::endl << std::endl;
+            << "Letter"
+            << "\n--------------------------------------------------------------------------------------" << std::endl;
 
     if (courses.size() == 0) {
         std::cout << std::setw(18) << "N\\A"
                 << std::setw(50) << "N\\A"
                 << std::setw(12) << "N\\A"
-                << std::setw(10) << "N\\A" << std::endl;
+                << "N\\A" << std::endl;
     } else {
         for (const Course &course: courses) {course.display();}
-        std::cout << std::endl << std::setw(89) << std::right << "-----------------------" << std::endl
+        std::cout << std::setw(86) << std::right << "--------------------" << std::endl
             << std::setw(75) << std::right << "GPA:\t" << std::setprecision(2) << std::fixed << gpa << std::endl
-            << "_________________________________________________________________________________________\n";
+            << "--------------------------------------------------------------------------------------\n";
     }
 }
+
 void Courses::exportCourses(std::ofstream &print) const {
-    print << "_________________________________________________________________________________________\n"
-                << std::setw(18) << std::left << "Code"
-                << std::setw(50) << "Title"
-                << std::setw(12) << "Credits"
-                << std::setw(10) << "Letter" << std::endl << std::endl;
+    print << "--------------------------------------------------------------------------------------\n"
+        << std::setw(18) << std::left << "Code"
+        << std::setw(50) << "Title"
+        << std::setw(12) << "Credits"
+        << "Letter"
+        << "\n--------------------------------------------------------------------------------------" << std::endl;
 
     if (courses.size() == 0) {
         print << std::setw(18) << "N\\A"
                 << std::setw(50) << "N\\A"
                 << std::setw(12) << "N\\A"
-                << std::setw(10) << "N\\A" << std::endl;
+                << "N\\A" << std::endl;
     } else {
         for (const Course &course: courses) {course.exportCourse(print);}
-        print << std::endl << std::setw(89) << std::right << "-----------------------" << std::endl
+        print << std::setw(86) << std::right << "------------------------" << std::endl
             << std::setw(75) << std::right << "GPA:\t" << std::setprecision(2) << std::fixed << gpa << std::endl
-            << "_________________________________________________________________________________________\n";
+            << "--------------------------------------------------------------------------------------\n";
     }
 }
 

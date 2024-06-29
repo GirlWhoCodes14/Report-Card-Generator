@@ -1,8 +1,14 @@
 #ifndef COURSES_H
 #define COURSES_H
 
-#include <vector>
-#include <algorithm>
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <fstream>
+#include <windows.h>
+#include <algorithm> // for using transform
+#include <cctype> // for using toupper
+#include <vector> // for vector
 
 #include "Course.h"
 
@@ -47,6 +53,7 @@ class Courses : public Course
         float totalPoints;
         float gpa;
 
+        IllegalInputException illegal;
 };
 
 #endif // COURSES_H
