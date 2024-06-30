@@ -110,7 +110,7 @@ bool Courses::deleteCourse(std::string code) {
 
 void Courses::added (std::string code, std::string title, float credits, float grade) {
     bool isAdded {addCourse(code, title, credits, grade)};
-    std::string message = "\n[ " + code + (std::string)(isAdded ? " was successfully edited" : " does not exist") + "! ]\n";
+    std::string message = "\n[ " + code + (std::string)(isAdded ? " was successfully added" : " failed to be added") + "! ]\n";
     illegal.coloredMessage( (isAdded ? FOREGROUND_GREEN : FOREGROUND_RED), message );
 }
 void Courses::edited (std::string code) {
